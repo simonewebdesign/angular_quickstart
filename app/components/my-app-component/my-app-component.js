@@ -6,12 +6,12 @@ import {Component, Foreach, Template, If} from 'angular2/angular2';
 })
 
 @Template({
-  url: System.baseURL+'src/components/my-app-component/my-app-component.html'
+  url: System.baseURL + 'app/components/my-app-component/my-app-component.html'
 })
 
 // Component controller
 export class MyAppComponent {
   constructor() {
-    this.name = 'Alice';
+    this.name = 'John';
   }
 }
