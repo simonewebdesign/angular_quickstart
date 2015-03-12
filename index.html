@@ -9,14 +9,19 @@
     <h1>Oh hai</h1>
 
     <!-- The app component created in app.es6 -->
-    <my-app></my-app>
+    <my-app-component></my-app-component>
 
     <script>
       // Rewrite the paths to load the files
       System.paths = {
         'angular2/*':'/angular2/*.js', // Angular
         'rtts_assert/*': '/rtts_assert/*.js', //Runtime assertions
-        'app': 'app.es6' // The my-app component
+        'app': 'app.es6', // The my-app component
+        // 'mycomp': 'myappcomponent.js',
+        'components/*': 'app/components/*.js',
+        'decorators/*': 'app/decorators/*.js',
+        'services/*': 'app/services/*.js',
+        'stores/*': 'app/stores/*.js'
       };
 
       // Kick off the application
