@@ -20,11 +20,36 @@
         'components/*': 'app/components/*.js',
         'decorators/*': 'app/decorators/*.js',
         'services/*': 'app/services/*.js',
-        'stores/*': 'app/stores/*.js'
+        'stores/*': 'app/stores/*.js',
+        'lib/*': 'lib/*.js'
       };
 
       // Kick off the application
       System.import('app');
+    </script>
+
+    <script>
+    (function () {
+      var ws = new WebSocket("ws://localhost:1337");
+
+      ws.onopen = function (ev) {
+        console.log('Connection opened.');
+        this.send('medications');
+      }
+
+      ws.onmessage = function (ev) {
+        console.log('Response from server: ' + ev.data);
+      }
+
+      ws.onclose = function (ev) {
+        console.log('Connection closed.');
+      }
+
+      ws.onerror = function (ev) {
+        console.log('An error occurred. Sorry for that.');
+      }
+
+    })();
     </script>
     
   </body>

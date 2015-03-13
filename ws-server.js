@@ -19,12 +19,14 @@ wsServer = new WebSocketServer({
 });
 
 function isAllowedOrigin(origin) {
-  valid_origins = ['http://localhost', '127.0.0.1'];
+  valid_origins = ['http://localhost:8080'];
   if (valid_origins.indexOf(origin) != -1) {
     console.log('Connection accepted from origin ' + origin);
     return true;
+  } else {
+    console.log('Connection rejected from origin ' + origin);
+    return false;
   }
-  return false;
 }
 
 wsServer.on('connection', function(webSocketConnection) {
@@ -32,18 +34,15 @@ wsServer.on('connection', function(webSocketConnection) {
 });
 
 wsServer.on('request', function(request) {
-
   var connection = isAllowedOrigin(request.origin) ?
-    request.accept()
-    : request.reject();
+    request.accept() : 
+    request.reject();
 
   connection.on('message', function(message) {
-
-    var response = JSON.stringify(jsonFile);
     console.log('Received Message: ' + message.utf8Data);
 
-    if (message.type === 'utf8') {
-      connection.sendUTF(response);
+    if (message.type === 'utf8' && message.utf8Data === 'medications') {
+      connection.sendUTF(JSON.stringify(jsonFile));
     }
   });
   connection.on('close', function(reasonCode, description) {
